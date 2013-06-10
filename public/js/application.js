@@ -1,7 +1,31 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $(document).on('keyup', function(event) {
+    if (event.keyCode == 70) {
+      var position = parseInt($('.pacman').css('left'));
+      if (position >= 810) {
+        $(document).unbind('keyup');
+        var complete = confirm("Pacman wins! Play again?");
+          if (complete == true) {
+            location.reload();
+          }
+      } else {
+        $(".pacman").animate({left: "+=20px"}, 80);
+        $(".playerone, .container, .track").animate({width: "-=20px"}, 80);
+      }
+    }
+   else if (event.keyCode == 74) {
+      var position = parseInt($('.batman').css('left'));
+      if (position >= 810) {
+        // var complete = confirm("NANANANANA BATMAN wins! Play again?");
+        //   if (complete == true) {
+        //     location.reload();
+        //   }
+        $("#track").after("<h2>Player 2 wins!</h2>");
+        $(document).unbind('keyup');
+      } else {
+      $(".batman").animate({left: "+=20px"}, 80);
+      $(".playertwo, .container, .track").animate({width: "-=20px"}, 80);
+      }
+    }
+  });
 });
